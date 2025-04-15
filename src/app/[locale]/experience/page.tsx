@@ -36,7 +36,15 @@ export default async function ExperiencePage({
               <div className="space-y-6">
                 {experiences.map((experience) => (
                   <div key={experience.id} className="border-b border-gray-200 dark:border-gray-700 pb-6">
-                    <ExperienceForm initialData={experience} />
+                    <ExperienceForm 
+                      initialData={{
+                        ...experience,
+                        current: !experience.endDate,
+                        startDate: experience.startDate.toISOString().split('T')[0],
+                        endDate: experience.endDate?.toISOString().split('T')[0] || '',
+                        description: experience.description || ''
+                      }} 
+                    />
                   </div>
                 ))}
               </div>

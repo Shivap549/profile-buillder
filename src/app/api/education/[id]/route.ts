@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { prisma } from "@/lib/prisma";
 
 export async function PUT(
@@ -30,7 +30,7 @@ export async function PUT(
       return NextResponse.json({ error: 'Education not found' }, { status: 404 });
     }
 
-    if (education.userId !== user.id) {
+    if (education.profileId !== user.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
@@ -77,7 +77,7 @@ export async function DELETE(
       return NextResponse.json({ error: 'Education not found' }, { status: 404 });
     }
 
-    if (education.userId !== user.id) {
+    if (education.profileId !== user.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
